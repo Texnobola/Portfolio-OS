@@ -10,7 +10,7 @@ import './VSCode.css';
 export const VSCode = () => {
   const { user } = useAuth();
   const [activeFile, setActiveFile] = useState('App.jsx');
-  const [readOnly, setReadOnly] = useState(user?.isGuest || false);
+  const [readOnly, setReadOnly] = useState(false);
   const [files, setFiles] = useState(PROJECT_FILES);
   const [showNewFile, setShowNewFile] = useState(false);
   const [newFileName, setNewFileName] = useState('');

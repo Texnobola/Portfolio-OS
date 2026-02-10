@@ -23,11 +23,11 @@ export const OSProvider = ({ children }) => {
     if (!user || user.isGuest) return;
 
     const loadSettings = async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('user_settings')
         .select('wallpaper')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
       
       if (data?.wallpaper) setWallpaperState(data.wallpaper);
     };
