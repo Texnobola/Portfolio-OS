@@ -16,6 +16,7 @@ export const Dock = ({ onAppClick }) => {
     { id: 'terminal', icon: 'https://cdn-icons-png.flaticon.com/512/2920/2920277.png', label: 'Terminal' },
     { id: 'settings', icon: 'https://cdn-icons-png.flaticon.com/512/3524/3524659.png', label: 'Settings' },
     { id: 'snake', icon: 'https://cdn-icons-png.flaticon.com/512/808/808439.png', label: 'Snake' },
+    { id: 'fikr', icon: '/fikr_logo.png', label: 'Fikr' },
   ];
 
   return (

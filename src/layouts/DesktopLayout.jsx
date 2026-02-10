@@ -61,6 +61,11 @@ export const DesktopLayout = () => {
   };
 
   const handleAppClick = (appId) => {
+    if (appId === 'fikr') {
+      window.open('https://fikr-web.netlify.app', '_blank');
+      return;
+    }
+    
     const titles = {
       terminal: 'Terminal',
       projects: 'Projects',
@@ -73,6 +78,7 @@ export const DesktopLayout = () => {
       paint: 'Paint',
       vscode: 'VS Code',
       camera: 'Camera',
+      fikr: 'Fikr',
     };
     play('windowOpen');
     openApp(appId, titles[appId], appComponents[appId]);
