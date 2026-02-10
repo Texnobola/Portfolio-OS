@@ -35,10 +35,6 @@ export const VSCode = () => {
   };
 
   const createFile = () => {
-    if (user?.isGuest) {
-      addToast('Sign in to create files', 'warning');
-      return;
-    }
     if (!newFileName.trim()) return;
     const ext = newFileName.split('.').pop();
     const langMap = { js: 'javascript', jsx: 'javascript', css: 'css', html: 'html', json: 'json' };
@@ -117,7 +113,17 @@ export const VSCode = () => {
       <div className="sidebar">
         <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>EXPLORER</span>
-          <button onClick={() => setShowNewFile(true)} style={{ background: 'none', border: 'none', color: '#cccccc', cursor: 'pointer', fontSize: '16px' }} title="New File">
+          <button 
+            onClick={() => {
+              if (user?.isGuest) {
+                addToast('Sign in to create files', 'warning');
+              } else {
+                setShowNewFile(true);
+              }
+            }} 
+            style={{ background: 'none', border: 'none', color: '#cccccc', cursor: 'pointer', fontSize: '16px' }} 
+            title="New File"
+          >
             <FiPlus />
           </button>
         </div>

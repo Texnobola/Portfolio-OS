@@ -42,7 +42,7 @@ Tech stack: JavaScript, HTML, CSS, React, Vite, Tailwind CSS, basic Node.js.
           },
           'Resume.pdf': {
             type: 'pdf',
-            url: 'https://example.com/resume.pdf',
+            url: '/Resume_Sultonov_O\'razali.pdf',
           },
           'Contact.vcf': {
             type: 'contact',
