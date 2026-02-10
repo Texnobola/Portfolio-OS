@@ -86,7 +86,7 @@ export const LoginScreen = ({ onLogin }) => {
             </button>
           </div>
         </form>
-        {error && <p className={`login-error ${isSignUp && !error.includes('error') ? 'success' : ''}`}>{error}</p>}
+        {error && <p className={`login-error ${error.includes('Check your email') ? 'success' : ''}`}>{error}</p>}
         <p className="login-hint">
           {isRealLogin ? (
             <>

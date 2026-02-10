@@ -32,7 +32,10 @@ export const AuthProvider = ({ children }) => {
       email, 
       password,
       options: {
-        emailRedirectTo: window.location.origin
+        emailRedirectTo: `${window.location.origin}/`,
+        data: {
+          email_confirm: false
+        }
       }
     });
     return { data, error };
@@ -44,6 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const signInAsGuest = () => {
     setUser({ id: 'guest', email: 'guest@sultonovos.local', isGuest: true });
+    setLoading(false);
   };
 
   return (
