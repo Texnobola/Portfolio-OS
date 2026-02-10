@@ -1,6 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
-import { useAuth } from './AuthContext';
+import { createContext, useContext, useState } from 'react';
 
 const OSContext = createContext();
 
@@ -13,50 +11,13 @@ const wallpapers = [
 ];
 
 export const OSProvider = ({ children }) => {
-  const { user } = useAuth();
   const [windows, setWindows] = useState([]);
   const [activeWindowId, setActiveWindowId] = useState(null);
   const [zIndexCounter, setZIndexCounter] = useState(1000);
   const [wallpaper, setWallpaperState] = useState(() => wallpapers[Math.floor(Math.random() * wallpapers.length)]);
 
-  useEffect(() => {
-    if (!user || user.isGuest) return;
-
-    const loadSettings = async () => {
-      const { data, error } = await supabase
-        .from('user_settings')
-        .select('wallpaper')
-        .eq('user_id', user.id)
-        .maybeSingle();
-      
-      if (data?.wallpaper) setWallpaperState(data.wallpaper);
-    };
-
-    loadSettings();
-
-    const channel = supabase
-      .channel('settings_changes')
-      .on('postgres_changes', {
-        event: '*',
-        schema: 'public',
-        table: 'user_settings',
-        filter: `user_id=eq.${user.id}`
-      }, (payload) => {
-        if (payload.new?.wallpaper) setWallpaperState(payload.new.wallpaper);
-      })
-      .subscribe();
-
-    return () => supabase.removeChannel(channel);
-  }, [user]);
-
-  const setWallpaper = async (newWallpaper) => {
+  const setWallpaper = (newWallpaper) => {
     setWallpaperState(newWallpaper);
-    
-    if (user && !user.isGuest) {
-      await supabase
-        .from('user_settings')
-        .upsert({ user_id: user.id, wallpaper: newWallpaper });
-    }
   };
 
   const openApp = (id, title, content) => {

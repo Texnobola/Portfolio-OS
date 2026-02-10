@@ -54,7 +54,7 @@ export const Mail = () => {
           from_email: formData.from,
           subject: formData.subject,
           message: formData.message,
-          to_email: 'texnobola@gmail.com',
+          to_email: 'pixeluzpro@gmail.com',
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
