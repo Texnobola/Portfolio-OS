@@ -3,6 +3,7 @@ import { FiSend, FiInbox, FiSend as FiSent, FiEdit } from 'react-icons/fi';
 import { useSound } from '../hooks/useSound';
 import { useNotification } from '../context/NotificationContext';
 import { useAuth } from '../context/AuthContext';
+import emailjs from '@emailjs/browser';
 import './Mail.css';
 
 const fakeInboxEmail = {
@@ -45,30 +46,29 @@ export const Mail = () => {
 
     setSending(true);
 
-    // Mock sending with 2 second delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Uncomment to use EmailJS:
-    // try {
-    //   await emailjs.send(
-    //     'YOUR_SERVICE_ID',
-    //     'YOUR_TEMPLATE_ID',
-    //     {
-    //       from_email: formData.from,
-    //       subject: formData.subject,
-    //       message: formData.message,
-    //       to_email: 'admin@sultonovweb.uz',
-    //     },
-    //     'YOUR_PUBLIC_KEY'
-    //   );
-    // } catch (error) {
-    //   console.error('Failed to send email:', error);
-    // }
-
-    play('windowOpen');
-    addToast('Message Sent Successfully!', 'success');
-    setToast({ type: 'success', message: 'Message Sent Successfully!' });
-    setFormData({ from: '', subject: '', message: '' });
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_email: formData.from,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'texnobola@gmail.com',
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      
+      play('windowOpen');
+      addToast('Message Sent Successfully!', 'success');
+      setToast({ type: 'success', message: 'Message Sent Successfully!' });
+      setFormData({ from: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      addToast('Failed to send message', 'error');
+      setToast({ type: 'error', message: 'Failed to send message' });
+    }
+    
     setSending(false);
     setTimeout(() => setToast(null), 3000);
   };
