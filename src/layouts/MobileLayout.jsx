@@ -1,24 +1,42 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX } from 'react-icons/fi';
+import { MobileWindow } from '../components/MobileWindow';
 import { Terminal } from '../apps/Terminal';
-import { Projects } from '../apps/Projects';
-import { Arcade } from '../apps/Arcade';
+import { Browser } from '../apps/Browser';
+import { Finder } from '../apps/Finder';
+import { SnakeGame } from '../apps/SnakeGame';
+import { Settings } from '../apps/Settings';
+import { Camera } from '../apps/Camera';
+import { useOS } from '../context/OSContext';
 import './MobileLayout.css';
 
 export const MobileLayout = () => {
+  const { wallpaper } = useOS();
   const [activeApp, setActiveApp] = useState(null);
 
   const apps = [
+    { id: 'finder', icon: 'https://cdn-icons-png.flaticon.com/512/3767/3767084.png', label: 'Finder', component: <Finder /> },
+    { id: 'mail', icon: 'https://cdn-icons-png.flaticon.com/512/732/732200.png', label: 'Mail', component: <Mail /> },
+    { id: 'browser', icon: 'https://cdn-icons-png.flaticon.com/512/1006/1006771.png', label: 'Browser', component: <Browser /> },
     { id: 'terminal', icon: 'https://cdn-icons-png.flaticon.com/512/2920/2920277.png', label: 'Terminal', component: <Terminal /> },
-    { id: 'projects', icon: 'https://cdn-icons-png.flaticon.com/512/3767/3767084.png', label: 'Projects', component: <Projects /> },
-    { id: 'arcade', icon: 'https://cdn-icons-png.flaticon.com/512/808/808439.png', label: 'Arcade', component: <Arcade /> },
+    { id: 'settings', icon: 'https://cdn-icons-png.flaticon.com/512/3524/3524659.png', label: 'Settings', component: <Settings /> },
+    { id: 'snake', icon: 'https://cdn-icons-png.flaticon.com/512/808/808439.png', label: 'Snake', component: <SnakeGame /> },
+    { id: 'camera', icon: 'https://cdn-icons-png.flaticon.com/512/685/685655.png', label: 'Camera', component: <Camera /> },
   ];
 
+  const getTime = () => {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  };
+
   return (
-    <div className="mobile-layout">
+    <div className="mobile-layout" style={{ backgroundImage: `url(${wallpaper})` }}>
       <div className="mobile-status-bar">
-        <span>{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+        <span>{getTime()}</span>
+        <div className="mobile-status-icons">
+          <span>📶</span>
+          <span>🔋</span>
+        </div>
       </div>
       
       <div className="mobile-grid">
@@ -37,23 +55,12 @@ export const MobileLayout = () => {
 
       <AnimatePresence>
         {activeApp && (
-          <motion.div
-            className="mobile-app-modal"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+          <MobileWindow
+            title={activeApp.label}
+            onClose={() => setActiveApp(null)}
           >
-            <div className="mobile-app-header">
-              <span>{activeApp.label}</span>
-              <button onClick={() => setActiveApp(null)}>
-                <FiX />
-              </button>
-            </div>
-            <div className="mobile-app-content">
-              {activeApp.component}
-            </div>
-          </motion.div>
+            {activeApp.component}
+          </MobileWindow>
         )}
       </AnimatePresence>
     </div>

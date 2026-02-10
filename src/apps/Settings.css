@@ -1,0 +1,122 @@
+.settings {
+  display: flex;
+  height: 100%;
+  background: var(--bg);
+}
+
+.settings-sidebar {
+  width: 200px;
+  background: rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 8px;
+}
+
+.settings-tab {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.settings-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+.settings-content {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.settings-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.settings-section > p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.wallpaper-item {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.wallpaper-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.wallpaper-item.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary);
+}
+
+.wallpaper-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.wallpaper-item span {
+  display: block;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+
+.system-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.info-value {
+  color: var(--text-secondary);
+}

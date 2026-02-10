@@ -14,7 +14,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 9998;
   font-size: 13px;
-  color: white;
+  color: var(--text-primary);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -26,4 +26,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.topbar-mute-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.topbar-mute-btn:hover {
+  opacity: 0.7;
 }

@@ -6,9 +6,16 @@ export const Dock = ({ onAppClick }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const apps = [
+    { id: 'finder', icon: 'https://cdn-icons-png.flaticon.com/512/3767/3767084.png', label: 'Finder' },
+    { id: 'vscode', icon: 'https://cdn-icons-png.flaticon.com/512/906/906324.png', label: 'VS Code' },
+    { id: 'mail', icon: 'https://cdn-icons-png.flaticon.com/512/732/732200.png', label: 'Mail' },
+    { id: 'browser', icon: 'https://cdn-icons-png.flaticon.com/512/1006/1006771.png', label: 'Browser' },
+    { id: 'paint', icon: 'https://cdn-icons-png.flaticon.com/512/3048/3048393.png', label: 'Paint' },
+    { id: 'music', icon: 'https://cdn-icons-png.flaticon.com/512/727/727245.png', label: 'Music' },
+    { id: 'camera', icon: 'https://cdn-icons-png.flaticon.com/512/685/685655.png', label: 'Camera' },
     { id: 'terminal', icon: 'https://cdn-icons-png.flaticon.com/512/2920/2920277.png', label: 'Terminal' },
-    { id: 'projects', icon: 'https://cdn-icons-png.flaticon.com/512/3767/3767084.png', label: 'Projects' },
-    { id: 'arcade', icon: 'https://cdn-icons-png.flaticon.com/512/808/808439.png', label: 'Arcade' },
+    { id: 'settings', icon: 'https://cdn-icons-png.flaticon.com/512/3524/3524659.png', label: 'Settings' },
+    { id: 'snake', icon: 'https://cdn-icons-png.flaticon.com/512/808/808439.png', label: 'Snake' },
   ];
 
   return (
